@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Remove-htop
+    apt:
+      name: htop
+      state: absent
+
+  - name: Update-repo
+    apt:
+      update_cache: yes
+
+  - name: Task-Name(Install Firefox)
+    apt:
+      name: firefox
+      state: latest
