@@ -2,6 +2,23 @@
 
 - hosts: all
   become: true
+  pre_tasks:
+
+  - name: install updates (CentOS)
+    package:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install updates (Ubuntu)
+    package:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+      #Bellow is the Nodes section (Not important for this documentation file)  
+- hosts: servers1
+  become: true
   tasks:
 
   - name: Install htop and firefox Ubuntu
@@ -10,7 +27,6 @@
         - htop
         - firefox
       state: absent
-      update_cache: yes
     when: ansible_distribution == "Ubuntu"
 
   - name: Install firefox and htop CentOS
@@ -19,5 +35,4 @@
         - firefox
         - htop
       state: absent
-      update_cache: yes
     when: ansible_distribution == "CentOS" and ansible_distribution_version == "8.4"
