@@ -4,10 +4,15 @@
   become: true
   tasks:
 
-  - name: Remove-htop
+  - name: install htop
     apt:
       name: htop
-      state: absent
+      state: latest
+
+  - name: Remove-htop
+    apt:
+      name: 
+      state: 
 
   - name: Update-repo
     apt:

@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install htop Ubuntu
+    apt:
+      name: htop
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Install firefox CentOS
+    yum:
+      name: firefox
+      state: latest
+    when: ansible_distribution == "CentOS" and ansible_distribution_version == "8.4"
