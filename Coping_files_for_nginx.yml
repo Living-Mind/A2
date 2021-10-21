@@ -52,3 +52,12 @@
           - htop
         state: latest
       when: ansible_distribution == "Ubuntu"
+
+    - name: copy index.html for nginx
+      tags: html
+      copy:
+        src: htmlFile/1.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
