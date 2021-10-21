@@ -1,0 +1,53 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (CentOS)
+    tags: always
+    package:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install updates (Ubuntu)
+    tags: always
+    package:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  
+- hosts: servers1
+  become: true
+  tasks:
+
+  - name: Install htop and firefox Ubuntu
+    package:
+      name: 
+        - htop
+        - firefox
+      state: absent
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Install firefox and htop CentOS
+    package:
+      name: 
+        - firefox
+        - htop
+      state: absent
+    when: ansible_distribution == "CentOS" and ansible_distribution_version == "8.4"
+
+
+- hosts: servers2
+  become: true
+  tasks:
+
+    - name: Install htop on servers2
+      tags: htopForServers2,htop
+      package:
+        name:
+          - htop
+        state: latest
+      when: ansible_distribution == "Ubuntu"
