@@ -1,0 +1,7 @@
+- name: Add user Legolas
+  tags: always,user
+  user:
+    name: Legolas
+    state: absent
+      #groups: root
+      #shell: /bin/bash

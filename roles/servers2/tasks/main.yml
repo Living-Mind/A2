@@ -1,0 +1,16 @@
+- name: Install htop on servers2
+  tags: htopForServers2,htop,nginx
+  package:
+    name:
+      - nginx
+      - htop
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: Start nginx service
+  tags: website,startser
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+  when: ansible_distribution == "Ubuntu"

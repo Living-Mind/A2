@@ -1,0 +1,15 @@
+- name: Install htop and firefox Ubuntu
+  package:
+    name: 
+      - htop
+      - firefox
+    state: absent
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install firefox and htop CentOS
+  package:
+    name: 
+      - firefox
+      - htop
+    state: absent
+  when: ansible_distribution == "CentOS" and ansible_distribution_version == "8.4"
